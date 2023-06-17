@@ -1,0 +1,59 @@
+{
+  "services": [
+    {
+      "id": "node_exporter-prometheus",
+      "name": "node1.weiow.com",
+      "address": "node1.weiow.com",
+      "port": 9100,
+      "tags": ["nodes"],
+      "checks": [{
+        "http": "http://node1.weiow.com:9100/metrics",
+        "interval": "5s"
+      }]
+    },
+    {
+      "id": "node_exporter-node2",
+      "name": "node2.weiow.com",
+      "address": "node2.weiow.com",
+      "port": 9100,
+      "tags": ["nodes"],
+      "checks": [{
+        "http": "http://node2.weiow.com:9100/metrics",
+        "interval": "5s"
+      }]
+    },
+    {
+      "id": "node_exporter-node3",
+      "name": "node3.weiow.com",
+      "address": "node3.weiow.com",
+      "port": 9100,
+      "tags": ["nodes"],
+      "checks": [{
+        "http": "http://node3.weiow.com:9100/metrics",
+        "interval": "5s"
+      }]
+    },
+    {
+      "id": "node_exporter-node4",
+      "name": "node4.weiow.com",
+      "address": "node4.weiow.com",
+      "port": 9100,
+      "tags": ["nodes"],
+      "checks": [{
+        "http": "http://node4.weiow.com:9100/metrics",
+        "interval": "5s"
+      }]
+    },
+    {
+      "id": "node_exporter-node5",
+      "name": "node5.weiow.com",
+      "address": "node5.weiow.com",
+      "port": 9100,
+      "tags": ["nodes"],
+      "checks": [{
+        "http": "http://node5.weiow.com:9100/metrics",
+        "interval": "5s"
+      }]
+    }
+  ]
+}

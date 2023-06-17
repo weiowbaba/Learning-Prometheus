@@ -1,0 +1,15 @@
+{
+  "services": [
+    {
+      "id": "tomcat-exporter",
+      "name": "tomcat-exporter",
+      "address": "tomcat.weiow.com",
+      "port": 8080,
+      "tags": ["tomcat-exporter"],
+      "checks": [{
+        "http": "http://tomcat.weiow.com:8080/metrics",
+        "interval": "5s"
+      }]
+    }
+  ]
+}

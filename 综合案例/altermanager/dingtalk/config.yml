@@ -1,0 +1,19 @@
+## Request timeout
+# timeout: 5s
+
+## Customizable templates path
+templates:
+  - /etc/prometheus-webhook-dingtalk/dingtalk_template.tmpl
+
+## You can also override default template using `default_message`
+## The following example to use the 'legacy' template from v0.3.0
+default_message:
+  title: '{{ template "legacy.title" . }}'
+  text: '{{ template "dingtalk.default.message" . }}'
+
+## Targets, previously was known as "profiles"
+targets:
+  webhook1:
+    url: https://oapi.dingtalk.com/robot/send?access_token=7bcbe48a32dc28c7c13af1eb0faa95b121b898fa41c3d273155cd3ffe3a78789 
+    # secret for signature
+    secret: SEC1d4b49aba1e3c7bace46b237294964258da5a4a99c43c72cee89c8990de44408 

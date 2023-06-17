@@ -1,0 +1,57 @@
+global:
+    resolve_timeout: 1m
+    smtp_smarthost: 'smtp.qq.com:465'
+    smtp_from: '3424538465@qq.com'
+    smtp_auth_username: '3424538465@qq.com'
+    smtp_auth_password: 'bsnjopsltlyudcbc'
+    smtp_hello: '@qq.com'
+    smtp_require_tls: false
+
+route:
+    # The labels by which incoming alerts are grouped together. For example,
+    # multiple alerts coming in for job=mysqld-exporter and alertname=mysql_down would
+    # be batched into a single group.
+    group_by: ['job', 'alertname'] 
+
+    # When a new group of alerts is created by an incoming alert, wait at
+    # least 'group_wait' to send the initial notification.
+    # This way ensures that you get multiple alerts for the same group that start
+    # firing shortly after another are batched together on the first notification.
+    group_wait: 10s
+
+    # When the first notification was sent, wait 'group_interval' to send a batch
+    # of new alerts that started firing for that group.
+    group_interval: 10s
+
+    # If an alert has successfully been sent, wait 'repeat_interval' to resend them.
+    repeat_interval: 5m
+
+    receiver: team-devops-dingtalk
+    #receiver: team-devops-email
+    #receiver: team-devops-wechat
+
+templates:
+  - '/etc/alertmanager/email_template.tmpl'
+  - '/etc/alertmanager/wechat_template.tmpl'
+
+ # 定义接收者
+receivers:
+- name: 'team-devops-email'
+  email_configs:
+    - to: 'weiowbaba@gamil.com'
+      headers:
+        subject: "{{ .Status | toUpper }} {{ .CommonLabels.env }}:{{ .CommonLabels.cluster }} {{ .CommonLabels.alertname }}"
+      html: '{{ template "email.default.html" . }}'
+      send_resolved: true 
+
+- name: 'team-devops-dingtalk'
+  webhook_configs:
+  - url: https://oapi.dingtalk.com/robot/send?access_token=7bcbe48a32dc28c7c13af1eb0faa95b121b898fa41c3d273155cd3ffe3a78789
+    send_resolved: true
+
+inhibit_rules: 
+  - source_match: 
+     severity: 'critical' 
+    target_match: 
+     severity: 'warning' 
+    equal: ['alertname', 'job']

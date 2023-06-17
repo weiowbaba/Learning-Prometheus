@@ -1,0 +1,8 @@
+- targets:
+  - node1.weiow.com:9100
+  - node2.weiow.com:9100
+  - node3.weiow.com:9100
+  - node4.weiow.com:9100
+  - node5.weiow.com:9100
+  labels:
+    app: node-exporter
